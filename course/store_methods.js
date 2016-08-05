@@ -23,3 +23,9 @@ const counter = (state = 0, saction) => {
 const { createStore } = Redux;
 
 const store = createStore(counter);
+
+console.log(store.getState());
+
+store.dispatch({ type: 'INCREMENT' });
+
+console.log(store.getState());
