@@ -7,19 +7,14 @@
 
 function counter(state, saction) {
 
-    if(typeof state === 'undefined') {
+    switch (action.type) {
 
-        return 0;
-
-    }
-
-    if (action.type === 'INCREMENT') {
-
-        return state + 1;
-
-    } else if (action.type === 'DECREMENT') {
-
-        return state - 1;
+        case 'INCREMENT':
+            return state + 1;
+        case 'DECREMENT':
+            return state - 1;
+        default:
+            return state;
 
     }
 
