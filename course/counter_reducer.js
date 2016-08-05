@@ -5,7 +5,7 @@
  *
  */
 
-function counter(state, saction) {
+const counter = (state = 0, saction) => {
 
     switch (action.type) {
 
