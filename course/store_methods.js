@@ -5,7 +5,7 @@
  *
  */
 
-const counter = (state = 0, saction) => {
+const counter = (state = 0, action) => {
 
     switch (action.type) {
 
@@ -24,8 +24,20 @@ const { createStore } = Redux;
 
 const store = createStore(counter);
 
-console.log(store.getState());
+const render = () => {
 
-store.dispatch({ type: 'INCREMENT' });
+    document.body.innerText = store.getState();
 
-console.log(store.getState());
+};
+
+store.subscribe(() => {
+
+    render();
+
+});
+
+document.addEventListener('click', () => {
+
+    store.dispatch({ type: 'INCREMENT' });
+
+});
