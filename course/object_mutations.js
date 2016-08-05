@@ -7,13 +7,11 @@
 
 const toggleTodo = (todo) => {
 
-    return {
+    return Object.assign({}, todo, {
 
-        id: todo.id,
-        text: todo.text,
         completed: !todo.completed
 
-    };
+    });
 
 };
 
