@@ -1,4 +1,3 @@
-
 /*
  * Impure functions.
  *
