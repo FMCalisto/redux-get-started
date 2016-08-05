@@ -1,5 +1,5 @@
 /*
- * Impure functions.
+ * Counter Reducer.
  *
  * @author: Francisco Maria Calisto
  *
