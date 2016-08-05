@@ -1,7 +1,6 @@
 <img src = "./media/logo-title-dark.png"/>
 
-[Redux](http://redux.js.org/) is a predictable state container for JavaScript apps.  
-(If you're looking for a WordPress framework, check out [Redux Framework](https://reduxframework.com/).)
+[Redux](http://redux.js.org/) is a predictable state container for JavaScript apps.
 
 It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test. On top of that, it provides a great developer experience, such as [live code editing combined with a time traveling debugger](https://github.com/gaearon/redux-devtools).
 
@@ -17,6 +16,80 @@ It is tiny (2kB, including dependencies).
 
 >**New! Learn Redux from its creator:  
 >[Getting Started with Redux](https://egghead.io/series/getting-started-with-redux) (30 free videos)**
+
+## Goals
+
+This repository is just a [Getting Started](https://egghead.io/courses/getting-started-with-redux) to learn Redux.
+
+This is a **COPY** from the main [redux](https://github.com/reactjs/redux/blob/master/README.md) source with some files made by [me](https://github.com/FMCalisto) on the [src](https://github.com/FMCalisto/redux-get-started/).
+
+## Where to start?
+
+You can start by watching the [Getting Started with Redux](https://egghead.io/courses/getting-started-with-redux) tutorial (free), here [Dan Abramov](https://github.com/gaearon) will help you learn [redux](http://redux.js.org/) while guiding you through the process of building apps.
+
+Topics include:
+
+	
+* The Single Immutable State Tree
+
+* Describing State Changes with Actions
+
+* Pure and Impure Functions
+
+* The Reducer Function
+
+* Writing a Counter Reducer with Tests
+
+* Store Methods: getState(), dispatch(), and subscribe()
+
+* Implementing Store from Scratch
+
+* React Counter Example
+
+* Avoiding Array Mutations with concat(), slice(), and ...spread
+
+* Avoiding Object Mutations with Object.assign() and ...spread
+
+* Writing a Todo List Reducer (Adding a Todo)
+
+* Writing a Todo List Reducer (Toggling a Todo)
+
+* Reducer Composition with Arrays
+
+* Reducer Composition with Objects
+
+* Reducer Composition with combineReducers()
+
+* Implementing combineReducers() from Scratch
+
+* React Todo List Example (Adding a Todo)
+
+* React Todo List Example (Toggling a Todo)
+
+* React Todo List Example (Filtering Todos)
+
+* Extracting Presentational Components (Todo, TodoList)
+
+* Extracting Presentational Components (AddTodo, Footer, FilterLink)
+
+* Extracting Container Components (FilterLink)
+
+* Extracting Container Components (VisibleTodoList, AddTodo)
+
+* Passing the Store Down Explicitly via Props
+
+* Passing the Store Down Implicitly via Context
+
+* Passing the Store Down with <Provider> from React Redux
+
+* Generating Containers with connect() from React Redux (VisibleTodoList)
+
+* Generating Containers with connect() from React Redux (AddTodo)
+
+* Generating Containers with connect() from React Redux (FooterLink)
+
+* Extracting Action Creators
+
 
 ### Installation
 
