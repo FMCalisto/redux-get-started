@@ -113,7 +113,7 @@ gitbook install
 gitbook serve
 ```
 
-### Installation
+## Installation
 
 To install the stable version:
 
