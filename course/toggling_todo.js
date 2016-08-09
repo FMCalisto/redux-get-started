@@ -185,9 +185,7 @@ const TodoList = ({
   </ul>
 );
 
-const AddTodo = ({
-  onAddClick
-}) => {
+const AddTodo = () => {
   let input;
 
   return (
@@ -196,7 +194,11 @@ const AddTodo = ({
         input = node;
       }} />
       <button onClick={() => {
-        onAddClick(input.value);
+          store.dispatch({
+            type: 'ADD_TODO',
+            id: nextTodoId++,
+            text: input.value
+          })
         input.value = '';
       }}>
         Add Todo
@@ -235,27 +237,27 @@ const getVisibleTodos = (
 
 }
 
-let nextTodoId = 0;
-const TodoApp = ({
-  todos,
-  visibilityFilter
-}) => {
-  return (
-    <div>
-      <AddTodo
-        onAddClick={text =>
-          store.dispatch({
-            type: 'ADD_TODO',
-            id: nextTodoId++,
-            text
-          })
-        }
-      />
+class VisibleTodoList extends Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() =>
+      this.forceUpdate()
+    );
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const props = this.props;
+    const state = store.getState();
+
+    return (
       <TodoList
         todos={
           getVisibleTodos(
-            todos,
-            visibilityFilter
+            state.todos,
+            state.visibilityFilter
           )
         }
         onTodoClick={id =>
@@ -265,22 +267,24 @@ const TodoApp = ({
           })
         }
       />
-      <Footer/>
-    </div>
-  );
+    );
+  }
 }
 
-// See Section 8 for earlier `render()` example
-const render = () => {
-  ReactDOM.render(
-    // Render the TodoApp Component to the <div> with id 'root'
-    <TodoApp 
-      {...store.getState()}
-    />,
-    document.getElementById('root')
+let nextTodoId = 0;
+const TodoApp = () => (
+  <div>
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
+  </div>
+);
 
-  )
-};
+// This render does not belong to `TodoApp`
+ReactDOM.render(
+  <TodoApp />,
+  document.getElementById('root')
+);
 
 store.subscribe(render);
 render();
