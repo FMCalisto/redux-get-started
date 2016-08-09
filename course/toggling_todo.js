@@ -1,5 +1,5 @@
 /*
- * React TODO List Example: Toggling TODO.
+ * TODO List
  *
  * @author: Francisco Maria Calisto
  *
@@ -85,7 +85,7 @@ const Link = ({
     <a href='#'
       onClick={e => {
         e.preventDefault();
-        onClick(filter);
+        onClick();
       }}
     >
       {children}
@@ -93,44 +93,34 @@ const Link = ({
   );
 };
 
-class FilterLink extends Component {  
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() =>
-      this.forceUpdate()
-    );
-  }
+const mapStateToLinkProps = (
+  state,
+  ownProps
+) => {
+  return {
+    active:
+      ownProps.filter === state.visibilityFilter
+  };
+};
 
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const { store } = context;
-    const state = store.getState();
-
-    return (
-      <Link
-        active={
-          props.filter === state.visibilityFilter
-        }
-        onClick={() =>
-          store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter: props.filter
-          })
-        }
-      >
-      {props.children}
-      </Link>
-    );
-  }
+const mapDispatchToLinkProps = (
+  dispatch,
+  ownProps
+) => {
+  return {
+    onClick: () => {
+      dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: ownProps.filter
+      });
+    }
+  };
 }
 
-FilterLink.contextTypes = {
-  store: React.PropTypes.object
-};
+const FilterLink = connect(
+  mapStateToLinkProps,
+  mapDispatchToLinkProps
+)(Link);
 
 const Footer = () => (
   <p>
@@ -188,7 +178,9 @@ const TodoList = ({
   </ul>
 );
 
-const AddTodo = (props, { store }) => {
+let nextTodoId = 0;
+
+let AddTodo = ({ dispatch }) => {
   let input;
 
   return (
@@ -197,7 +189,7 @@ const AddTodo = (props, { store }) => {
         input = node;
       }} />
       <button onClick={() => {
-          store.dispatch({
+          dispatch({
             type: 'ADD_TODO',
             id: nextTodoId++,
             text: input.value
@@ -210,45 +202,29 @@ const AddTodo = (props, { store }) => {
   );
 };
 
-AddTodo.contextTypes = {
-  store: React.PropTypes.object
-};
+AddTodo = connect()(AddTodo);
 
 const getVisibleTodos = (
-
   todos,
-  filter
-
-) => {
+  filter) => {
 
   switch (filter) {
-
     case 'SHOW_ALL':
       return todos;
-
     case 'SHOW_COMPLETED':
       return todos.filter(
-
         t => t.completed
-
       );
-
     case 'SHOW_ACTIVE':
       return todos.filter(
-
         t => !t.completed
-
       );
-
   }
-
 }
 
-AddTodo.contextTypes = {
-  store: React.PropTypes.object
-};
-
-const mapStateToProps = (state) => {
+const mapStateToTodoListProps = (
+  state
+) => {
   return {
     todos: getVisibleTodos(
       state.todos,
@@ -257,13 +233,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (disptach) => {
+const mapDispatchToTodoListProps = (
+  disptach
+) => {
   return {
     onTodoClick: (id) => {
       dispatch({
         type: 'TOGGLE_TODO',
         id
-      })
+      });
     }
   };
 };
@@ -272,8 +250,8 @@ const { connect } = Reactredux;
 // import { connect } from 'react-redux';
 
 const VisibleTodoList = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToTodoListProps,
+  mapDispatchToTodoListProps
 )(TodoList);
 
 const TodoApp = () => (
@@ -295,6 +273,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-store.subscribe(render);
-render();
