@@ -87,7 +87,7 @@
     "sinon-chai": "^2.10.0",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
-    "webpack": "^2.5.1",
+    "webpack": "^5.94.0",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.2",
     "yargs": "^8.0.1"
